@@ -1,5 +1,7 @@
 var handlerCallback,
 	FileDropper = function (dropArea, process) {
+		this.name = 'FileDropper',
+		this.version = '1.0.0',
 		this.init(dropArea);
 		this.process = process || function () {
 			alert('Good, I received your file(e) but you didn\'t say me what I am supposed to do with ?!')
@@ -127,7 +129,7 @@ FileDropper.prototype = {
 	},
 	init: function	(dropArea) {
 		this.dropArea = dropArea || document.body;
-		if (window.File && window.FileReader && window.FileList && window.Blob) {
+		if ('draggable' in this.dropArea) {
 			this.on(window, 'dragover', this.blockEvent, false);
 			this.on(window, 'drop', this.blockEvent, false);
 			this.on(this.dropArea, 'dragenter', this, false);
@@ -136,7 +138,7 @@ FileDropper.prototype = {
 			this.on(this.dropArea, 'dragend', this, false);
 			this.on(this.dropArea, 'drop', this, false);
 		} else {
-			alert('Your browser cannot manage an HTML5 file upload');
+			alert('Your browser cannot use the HTML5 drag & drop API');
 		}
 		return this;
 	}
