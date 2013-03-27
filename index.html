@@ -11,16 +11,74 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="assets/css/normalize.min.css">
+        <link rel="stylesheet" href="assets/css/vendor/prettyprint-sunburst.css">
         <link rel="stylesheet" href="assets/css/app.css">
         <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
-        <p>ALO UI C BOILERPLATE!</p>
+        <header id='app-header'>
+            <h1>FileDrop - Simple Drag &#38; Drop file management demo</h1>
+        </header>
+        <section id='app-container'>
+            <div id='drop-area'>
+                <div class='info'>
+                    <h4>Hey, drop some files here !</h4>
+                    <p>A few dragleave event firing bug occurs actually in Google Chrome when you drag over a child of the binded drag area. It is fixed by the function "checkRelativePosition" method of this Uploader. (Watch assets/js/Uploader.js file)</p>
+                </div>
+            </div>
+            <h5 id='uploaded-files-header'>List of uploaded Files</h5>
+            <ul id='uploaded-files'></ul>
+        </section>
+        <footer id='app-footer'>
+            <h3>This file dropper is standalone, it does not require any external library.</h3>
+            <h3>I just use jQuery for this application to upload the files with AJAX.</h3>
+            <h5>And OK, I'm ashamed to admit that I use jQuery to render the list items, too, instead one of <a href='http://garann.github.com/template-chooser/' target='_blank'>these amawing template engines</a></h5>
+            <p>It just manage the drag &#38; drop events.</p>
+            <p>It takes two arguments: The first is the DOM element on which the drop events will be binded. [will be replaced by document.body if is null]<br />The second is the method to apply when the drop event is fired. [will display a javascript alert() if not defined]</p>
+            <code class='prettyprint lang-html'>
+&lt;script src='assets/js/file-dropper.js'&gt;&lt;/script&gt;
+&lt;script&gt;
+    var FD = new FileDropper(document.getElementById('#drop-area'), function (files, dropEvent, dropper) {
+        // This is your callback, you can catch 3 arguments: a files array, the original dropEvent and the current FileDropper instance
+        // Do what you want here, by example, upload your files asynchrounously
+        var i,
+            data;
+        if (window.FormData) {
+            data = new FormData();
+            for (i = 0; i &lt; files.length; i++) {
+                data.append('files[]', files[i]);
+            }
+            $.ajax({
+                'url': 'upload.php',
+                'type': 'post',
+                'cache': false,
+                'async': true,
+                'processData': false, // Required: http://stackoverflow.com/questions/11071100/jquery-uncaught-typeerror-illegal-invocation-at-ajax-request-when-data-param
+                'contentType': false,
+                'data': files,
+                'dataType': 'json'
+            }).done(function (response) {
+                // Manage your server response
+                alert('Oh yeah !!!');
+            }).fail(function (response) {
+                // Manage the response and check yourself :)
+                alert('GAME OVER... Insert coins to replay ! [and check your server-side stuff...]');
+            });
+        } else {
+            alert('You should up-to-date your browser / download a real one !');
+        }
+    });
+&lt;/script&gt;
+            </code>
+        </footer>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.9.1.min.js"><\/script>')
         </script>
+        <script src='assets/js/vendor/prettify.min.js'></script>
+        <script src='assets/js/vendor/lang-css.min.js'></script>
         <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/file-dropper.js"></script>
         <script src="assets/js/app.js"></script>
     </body>
 </html>

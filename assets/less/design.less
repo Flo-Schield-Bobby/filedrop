@@ -1,0 +1,76 @@
+@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+@ui-default: rgb(221, 221, 221);
+@ui-blue: rgb(0, 115, 234);
+@ui-red: rgb(255, 0, 132);
+
+html {
+	body {
+		font-family: 'Lato', sans-serif;
+		#app-header {
+			h1 {
+				color: @ui-blue;
+				text-align: center;
+				font-size: 26px;
+			}
+		}
+		#app-container {
+			#drop-area {
+				border: 2px dashed @ui-default;
+				border-radius: 10px;
+				&.hover {
+					border: 2px solid @ui-blue;
+					cursor: pointer;
+				}
+				.info {
+					h4 {
+						color: @ui-blue;
+						font-size: 16px;
+						text-transform: uppercase;
+					}
+					p {
+						color: @ui-red;
+						font-size: 13px;
+						font-weight: 200;
+					}
+				}
+			}
+			#uploaded-files {
+				list-style: none;
+				.uploaded-file {
+					font-size: 12px;
+					text-decoration: underline;
+					color: @ui-blue;
+					border-bottom: 1px solid @ui-red;
+					.filename,
+					.filetype,
+					.filesize {
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+			}
+		}
+		#app-footer {
+			code {
+				text-align: left;
+				white-space: pre-wrap;
+				font-size: 11px;
+			}
+		}
+		a {
+			color: @ui-blue;
+			text-decoration: none;
+			&:hover {
+				color: @ui-red;
+				text-decoration: underline;
+			}
+		}
+		::selection {
+			color: @ui-red;
+		}
+		::-moz-selection {
+			color: @ui-red;
+		}
+	}
+}

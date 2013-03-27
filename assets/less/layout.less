@@ -1,0 +1,66 @@
+.size(@width: 80%, @min-width: 250px, @max-width: 800px) {
+	width: @width;
+	min-width: @min-width;
+	max-width: @max-width;
+	margin: auto;
+}
+
+html {
+	body {
+		#app-header {
+			.size();
+		}
+		#app-container {
+			.size();
+			#drop-area {
+				position: relative;
+				height: 350px;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				.info {
+					display: inline-block;
+					height: 100%;
+					padding: 50px 20px;
+					-webkit-box-sizing: border-box;
+					-moz-box-sizing: border-box;
+					box-sizing: border-box;
+				}
+			}
+			#uploaded-files-header {
+				display: none;
+				margin: 15px 0 0 0;
+			}
+			#uploaded-files {
+				margin: 5px 0;
+				padding: 0;
+				.uploaded-file {
+					padding: 5px 0;
+					.filename {
+						display: inline-block;
+						width: 40%;
+						overflow: hidden;
+					}
+					.filetype {
+						display: inline-block;
+						width: 30%;
+						overflow: hidden;
+					}
+					.filesize {
+						display: inline-block;
+						width: 30%;
+						overflow: hidden;
+					}
+				}
+			}
+		}
+		#app-footer {
+			.size();
+			margin: 0 auto 25px auto;
+			code {
+				display: block;
+				padding: 0 0 0 5px;
+			}
+		}
+	}
+}
